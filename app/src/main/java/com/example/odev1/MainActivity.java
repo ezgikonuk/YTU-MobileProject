@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
     @SuppressLint("SetTextI18n")
     private void validate(String userName, String userPassword) {
         Database db = new Database(this);
-        Object questionObj = db.getQuest();
+        //Object questionObj = db.getQuest();
         if (userName.length() < 1 || userPassword.length() < 1) {
             Info.setText("Kullanıcı adı ya da parola boş bırakılamaz.");
         } else {
