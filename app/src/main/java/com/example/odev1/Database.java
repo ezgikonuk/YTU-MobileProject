@@ -100,18 +100,15 @@ public class Database extends SQLiteOpenHelper {
 
     public Boolean loginAuth(String userName, String password) {
         //Kullanıcı girişi için
-        String selectQuery = "SELECT * FROM " + TABLE_NAME + " WHERE username = '" + userName + "' AND password = '" + password + "'";
-
+       boolean check = false;
         SQLiteDatabase db = getReadableDatabase();
-        SQLiteStatement statement = db.compileStatement(selectQuery);
-        Long affectedRows = statement.simpleQueryForLong();
-        db.close();
-
-        if (affectedRows > 0) {
-            return true;
-        } else {
-            return false;
-        }
+        Cursor c1 = db.rawQuery(
+                "SELECT * FROM " + TABLE_NAME + " WHERE username=? AND password=?",
+                new String[]{userName, password}
+        );
+        check = c1.moveToFirst();
+        c1.close();
+        return check;
     }
 
     // SORU EKLEME
